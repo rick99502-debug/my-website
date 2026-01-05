@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>For My Tufu 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #ffdde1 0%, #ee9ca7 40%, #3a1c71 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      color: #fff;
+    }
+
+    .hearts {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -60px;
+      color: #ffd1dc;
+      font-size: 24px;
+      animation: floatUp linear infinite;
+      opacity: 0.85;
+      filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) translateX(0) scale(0.7);
+        opacity: 0;
+      }
+      15% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-130vh) translateX(40px) scale(1.3);
+        opacity: 0;
+      }
+    }
+
+    .card {
+      position: relative;
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 24px;
+      padding: 70px 20px 26px; /* big top padding so text is far from teddy */
+      width: min(380px, 92vw);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.35),
+        0 0 25px rgba(255, 255, 255, 0.15);
+      text-align: center;
+    }
+
+    /* TEDDY: very top, outside the text zone */
+    .teddy-wrapper {
+      width: 80px;
+      height: 80px;
+      position: absolute;
+      top: -50px; /* higher */
+      left: 50%;
+      transform: translateX(-50%);
+      animation: floatTeddy 3s ease-in-out infinite;
+    }
+
+    @keyframes floatTeddy {
+      0%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+      50% {
+        transform: translateX(-50%) translateY(-6px);
+      }
+    }
+
+    .teddy-head {
+      width: 56px;
+      height: 48px;
+      background: #ffb6c1;
+      border-radius: 50px 50px 45px 45px;
+      position: absolute;
+      top: 16px;
+      left: 12px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+    }
+
+    .teddy-ear {
+      width: 22px;
+      height: 22px;
+      background: #ffb6c1;
+      border-radius: 50%;
+      position: absolute;
+      top: 5px;
+      box-shadow: 0 3px 7px rgba(0, 0, 0, 0.22);
+    }
+
+    .teddy-ear.left {
+      left: 11px;
+    }
+
+    .teddy-ear.right {
+      right: 11px;
+    }
+
+    .teddy-ear-inner {
+      width: 15px;
+      height: 15px;
+      background: #ffd7e0;
+      border-radius: 50%;
+      position: absolute;
+      top: 4px;
+      left: 4px;
+    }
+
+    .teddy-eye {
+      width: 5px;
+      height: 7px;
+      background: #3b2a2a;
+      border-radius: 50%;
+      position: absolute;
+      top: 14px;
+    }
+
+    .teddy-eye.left {
+      left: 16px;
+    }
+
+    .teddy-eye.right {
+      right: 16px;
+    }
+
+    .teddy-nose {
+      width: 9px;
+      height: 7px;
+      background: #3b2a2a;
+      border-radius: 50%;
+      position: absolute;
+      left: 50%;
+      top: 21px;
+      transform: translateX(-50%);
+    }
+
+    .teddy-mouth {
+      width: 16px;
+      height: 11px;
+      border-bottom: 2px solid #3b2a2a;
+      border-radius: 0 0 50px 50px;
+      position: absolute;
+      left: 50%;
+      top: 25px;
+      transform: translateX(-50%);
+    }
+
+    .teddy-body {
+      width: 64px;
+      height: 52px;
+      background: #ffb6c1;
+      border-radius: 50px;
+      position: absolute;
+      top: 60px;
+      left: 8px;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.35);
+    }
+
+    .teddy-heart {
+      width: 34px;
+      height: 30px;
+      background: #ff4b6e;
+      position: absolute;
+      top: 66px;
+      left: 27px;
+      transform: rotate(-45deg);
+      box-shadow: 0 0 15px rgba(255, 75, 110, 0.8);
+      animation: pulseHeart 1.5s ease-in-out infinite;
+    }
+
+    .teddy-heart::before,
+    .teddy-heart::after {
+      content: "";
+      position: absolute;
+      width: 34px;
+      height: 30px;
+      background: #ff4b6e;
+      border-radius: 50%;
+    }
+
+    .teddy-heart::before {
+      top: -16px;
+      left: 0;
+    }
+
+    .teddy-heart::after {
+      left: 16px;
+      top: 0;
+    }
+
+    @keyframes pulseHeart {
+      0%, 100% {
+        transform: rotate(-45deg) scale(1);
+      }
+      50% {
+        transform: rotate(-45deg) scale(1.08);
+      }
+    }
+
+    .title {
+      font-size: 22px;
+      margin-bottom: 6px;
+      letter-spacing: 0.04em;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      opacity: 0.9;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .question {
+      font-size: 18px;
+      margin-bottom: 14px;
+      min-height: 44px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;          /* clear gap between buttons */
+      margin-top: 12px;
+      position: relative;
+      min-height: 44px;
+    }
+
+    button {
+      border: none;
+      outline: none;
+      padding: 10px 22px;
+      border-radius: 999px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    #yes-btn {
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(255, 118, 146, 0.7);
+      position: relative;
+      z-index: 1;
+    }
+
+    #yes-btn:hover {
+      transform: translateY(-1px) scale(1.02);
+      box-shadow: 0 10px 22px rgba(255, 118, 146, 0.85);
+    }
+
+    #no-btn {
+      background: #f5f5f5;
+      color: #444;
+      box-shadow: 0 5px 14px rgba(0, 0, 0, 0.25);
+      position: absolute;   /* so it can run away */
+      z-index: 2;
+    }
+
+    .status {
+      font-size: 13px;
+      margin-top: 10px;
+      min-height: 18px;
+      opacity: 0.95;
+    }
+
+    .status.sad {
+      color: #ffd1d1;
+    }
+
+    .status.happy {
+      color: #ffe7ff;
+    }
+
+    .final-message {
+      margin-top: 16px;
+      font-size: 14px;
+      line-height: 1.6;
+      display: none;
+    }
+
+    .final-message.show {
+      display: block;
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 420px) {
+      .title {
+        font-size: 20px;
+      }
+      .question {
+        font-size: 17px;
+      }
+      button {
+        padding: 10px 18px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts" id="hearts-container"></div>
+
+  <div class="card">
+    <div class="teddy-wrapper">
+      <div class="teddy-ear left">
+        <div class="teddy-ear-inner"></div>
+      </div>
+      <div class="teddy-ear right">
+        <div class="teddy-ear-inner"></div>
+      </div>
+      <div class="teddy-head">
+        <div class="teddy-eye left"></div>
+        <div class="teddy-eye right"></div>
+        <div class="teddy-nose"></div>
+        <div class="teddy-mouth"></div>
+      </div>
+      <div class="teddy-body"></div>
+      <div class="teddy-heart"></div>
+    </div>
+
+    <h2 class="title">For my cutest Tufu 🤍</h2>
+    <p class="subtitle">
+      Even from miles away, your smile is the place where my heart feels home.
+    </p>
+
+    <!-- Multi-step questions -->
+    <p class="question" id="question-text">
+      I've something to tell you... wanna know what? 🥺
+    </p>
+
+    <div class="buttons" id="buttons-wrapper">
+      <button id="yes-btn">Yes 😳</button>
+      <button id="no-btn">No 😈</button>
+    </div>
+
+    <p class="status" id="status-text"></p>
+
+    <div class="final-message" id="final-message">
+      Dear Tufu,<br />
+      I’ve been waiting to say this properly…<br /><br />
+      I really, really love you. More than words, more than distance, more than every little fight or misunderstanding.<br />
+      I’m never giving up on you, on us, or on this crazy beautiful story we’re writing together. 💖
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("no-btn");
+    const yesBtn = document.getElementById("yes-btn");
+    const statusText = document.getElementById("status-text");
+    const finalMessage = document.getElementById("final-message");
+    const buttonsContainer = document.querySelector(".buttons");
+    const buttonsWrapper = document.getElementById("buttons-wrapper");
+    const heartsContainer = document.getElementById("hearts-container");
+    const questionText = document.getElementById("question-text");
+
+    // Your sequence of fun/flirty questions
+    const questions = [
+      "I've something to tell you... wanna know what? 🥺",
+      "Are you sure you're ready for maximum cuteness overload? 😼",
+      "Do you know that my favourite place is anywhere with you? 💕",
+      "Last question... will you let this idiot love you forever? 🫶"
+    ];
+
+    let currentStep = 0;
+
+    function showQuestion(step) {
+      questionText.textContent = questions[step];
+      statusText.textContent = "";
+      statusText.classList.remove("sad", "happy");
+    }
+
+    function positionNoButton() {
+      const containerRect = buttonsContainer.getBoundingClientRect();
+      const btnRect = noBtn.getBoundingClientRect();
+
+      const padding = 4;
+      const maxX = containerRect.width - btnRect.width - padding;
+      const maxY = 0;
+
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
+
+      noBtn.style.left = randomX + "px";
+      noBtn.style.top = randomY + "px";
+    }
+
+    window.addEventListener("load", () => {
+      showQuestion(currentStep);
+      positionNoButton();
+    });
+
+    function moveNoButton() {
+      const containerRect = buttonsContainer.getBoundingClientRect();
+      const btnRect = noBtn.getBoundingClientRect();
+
+      const padding = 4;
+      const maxX = containerRect.width - btnRect.width - padding;
+      const minX = 0;
+
+      let newX = Math.random() * maxX;
+      let newY = -10 + Math.random() * 20;
+
+      const currentX =
+        parseFloat(noBtn.style.left || (btnRect.left - containerRect.left)) || 0;
+      if (Math.abs(newX - currentX) < 40) {
+        if (newX < containerRect.width / 2) {
+          newX = currentX + 60;
+        } else {
+          newX = currentX - 60;
+        }
+        newX = Math.max(minX, Math.min(maxX, newX));
+      }
+
+      noBtn.style.transform = "scale(0.95)";
+      setTimeout(() => {
+        noBtn.style.left = newX + "px";
+        noBtn.style.top = newY + "px";
+        noBtn.style.transform = "scale(1)";
+      }, 40);
+
+      statusText.textContent = "You can’t escape, you’re stuck with me now 😤💗";
+      statusText.classList.add("sad");
+    }
+
+    ["mouseover", "touchstart", "click"].forEach((eventName) => {
+      noBtn.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        moveNoButton();
+      });
+    });
+
+    yesBtn.addEventListener("click", () => {
+      if (currentStep < questions.length - 1) {
+        // go to next playful question
+        currentStep++;
+        showQuestion(currentStep);
+        positionNoButton();
+        statusText.textContent = "Hehe, knew you’d say yes to me 😏";
+        statusText.classList.remove("sad");
+        statusText.classList.add("happy");
+      } else {
+        // final confession
+        questionText.textContent = "Okay... here it is, my honest heart for you 💌";
+        statusText.textContent = "Read this carefully, okay? 🤍";
+        statusText.classList.remove("sad");
+        statusText.classList.add("happy");
+        finalMessage.classList.add("show");
+        spawnBurstHearts();
+
+        // hide buttons after final yes
+        yesBtn.style.display = "none";
+        noBtn.style.display = "none";
+        buttonsWrapper.style.minHeight = "0";
+      }
+    });
+
+    function spawnFloatingHearts() {
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.textContent = Math.random() > 0.5 ? "💖" : "🧸";
+        const startLeft = Math.random() * 100;
+        const duration = 7 + Math.random() * 5;
+        const size = 18 + Math.random() * 14;
+
+        heart.style.left = startLeft + "vw";
+        heart.style.animationDuration = duration + "s";
+        heart.style.fontSize = size + "px";
+
+        heartsContainer.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, duration * 1000);
+      }, 800);
+    }
+
+    function spawnBurstHearts() {
+      for (let i = 0; i < 18; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.textContent = "💗";
+        const startLeft = 20 + Math.random() * 60;
+        const duration = 4 + Math.random() * 3;
+        const size = 20 + Math.random() * 12;
+
+        heart.style.left = startLeft + "vw";
+        heart.style.animationDuration = duration + "s";
+        heart.style.fontSize = size + "px";
+
+        heartsContainer.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, duration * 1000);
+      }
+    }
+
+    spawnFloatingHearts();
+  </script>
+</body>
+</html>
